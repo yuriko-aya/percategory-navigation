@@ -20,9 +20,10 @@ function add_bootstrap() {
 add_action('the_content','the_nav');
 function the_nav($content) {
     if(is_single()){
+        global $post;
         //Get whatever object we're working with (category or post?)
         $thisObj = get_queried_object();
-        $post_title = get_the_title();
+        $post_slug = $post->post_name;
     
         //If it's a post, get the category ID
         if(!is_null($thisObj->ID)){
@@ -46,13 +47,13 @@ function the_nav($content) {
         );
 
         $cat_lists = get_posts($args);
-        //print_r($cat_lists);
+
         foreach($cat_lists as $category) {
             $post_list[] = $category->post_title;
             $link_list[] = $category->post_name;
         }
 
-        $location = array_search($post_title, $post_list);
+        $location = array_search($post_slug, $link_list);
         if($location == 0) {
             $prev = '<div class="col-sm-4 text-left"></div>';
         } else {
