@@ -10,3 +10,9 @@ a:visited {
     text-decoration: none;
     color: inherit;
 }
+.percanav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px;
+    border-top: solid 1px;
+}

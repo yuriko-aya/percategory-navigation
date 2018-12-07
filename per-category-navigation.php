@@ -55,18 +55,18 @@ function the_nav($content) {
 
         $location = array_search($post_slug, $link_list);
         if($location == 0) {
-            $prev = '<div class="col-sm-4 text-left"></div>';
+            $prev = '<div class="col-sm-4 text-left percanav"></div>';
         } else {
-            $prev = '<div class="col-sm-4 text-left"><a href="/' .$link_list[$location-1].'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
+            $prev = '<div class="col-sm-4 text-left percanav"><a href="/' .$link_list[$location-1].'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
         }
         if($location+1 == count($post_list)) {
-            $next = '<div class="col-sm-4 text-right"+></div>';
+            $next = '<div class="col-sm-4 text-right percanav"></div>';
         } else {
-            $next = '<div class="col-sm-4 text-right"><a href="/' .$link_list[$location+1].'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
+            $next = '<div class="col-sm-4 text-right percanav"><a href="/' .$link_list[$location+1].'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
         }
-        $cat_index = '<div class="col-sm-4 text-center"><a href="/' .$cat_link.'">INDEX <br>' .$cat_name. '</a></div>';
+        $cat_index = '<div class="col-sm-4 text-center percanav"><a href="/' .$cat_link.'">INDEX <br>' .$cat_name. '</a></div>';
         
-        $cat_nav = '<hr><div class="row">'. $prev.$cat_index.$next .'</div><hr>';
+        $cat_nav = '<div class="row">'. $prev.$cat_index.$next .'</div>';
 
         return $content.$cat_nav;
     } else {
