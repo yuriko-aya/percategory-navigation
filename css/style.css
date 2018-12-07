@@ -1,0 +1,12 @@
+a {
+    text-decoration: none;
+    color: inherit !important;
+}
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
