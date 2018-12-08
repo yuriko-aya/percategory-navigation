@@ -64,7 +64,7 @@ function the_nav($content) {
         } else {
             $next = '<div class="col-sm-4 text-right percanav"><a href="/' .$link_list[$location+1].'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
         }
-        $cat_index = '<div class="col-sm-4 text-center percanav"><a href="/' .$cat_link.'">INDEX <br>' .$cat_name. '</a></div>';
+        $cat_index = '<div class="col-sm-4 text-center percanav"><a href="/category/novel/' .$cat_link.'">INDEX <br>' .$cat_name. '</a></div>';
         
         $cat_nav = '<div class="row">'. $prev.$cat_index.$next .'</div>';
 
