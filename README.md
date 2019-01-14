@@ -10,4 +10,4 @@ preview https://aya.sanusi.id/juu-sai-no-saikyou-madoushi-chpater-19/
 ![alt text](https://github.com/yuriko-aya/percategory-navigation/raw/master/ss.png "Navigation screenshot (top)")
 
 # To do
-- Make choice in admin page for top, bottom, or both location 
+- ~~Make choice in admin page for top, bottom, or both location~~ 

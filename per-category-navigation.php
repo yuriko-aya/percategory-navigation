@@ -10,6 +10,8 @@ License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 */
 
+require( dirname(__FILE__) . '/' . 'admin/admin-menu.php');
+
 add_action('get_header','add_bootstrap');
 function add_bootstrap() {
     // let's add bootstrap for nav in case you don't have one! also some cutom css
@@ -76,7 +78,15 @@ function the_nav($content) {
 
         $cat_nav = '<div class="row">'. $prev.$cat_index.$next .'</div>';
 
-        return $cat_nav. '<br><br>' .$content.$cat_nav;
+        // Checking for existed config
+        if (get_option('catnav_location') && get_option('catnav_location') == 'top') {
+            return $cat_nav. '<br><br>' .$content;
+        } elseif (get_option('catnav_location') && get_option('catnav_location') == 'bottom') {
+            return $content.$cat_nav;
+        } else {
+            return $cat_nav. '<br><br>' .$content.$cat_nav;
+        }
+
     } else {
         return $content;
     }
