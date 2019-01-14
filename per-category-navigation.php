@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name:  Per Category Navigation
-Plugin URI:   https://aya.sanus.id
+Plugin URI:   https://aya.sanusi.id
 Description:  Make Navigation for post by category
 Version:      20190114
 Author:       Yuriko Aya
@@ -12,7 +12,7 @@ License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 
 add_action('get_header','add_bootstrap');
 function add_bootstrap() {
-    // let's ass bootstrap for nav even if we already have one! also some cutom css
+    // let's add bootstrap for nav in case you don't have one! also some cutom css
     wp_enqueue_style('bootstrap_for_nav','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
     wp_enqueue_style('per_category_navi_style', plugins_url( 'css/style.css', __FILE__ ));
 }
