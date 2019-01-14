@@ -5,7 +5,7 @@ This will give you link to next and previous post also category page from the sa
 
 preview https://aya.sanusi.id/juu-sai-no-saikyou-madoushi-chpater-19/
 
-#SS
+# SS
 
 ![alt text](https://github.com/yuriko-aya/percategory-navigation/raw/master/ss.png "Navigation screenshot (top)")
 
