@@ -80,11 +80,11 @@ function the_nav($content) {
 
         // Checking for existed config
         if (get_option('catnav_location') && get_option('catnav_location') == 'top') {
-            return $cat_nav. '<br><br>' .$content;
+            return $cat_nav.$content;
         } elseif (get_option('catnav_location') && get_option('catnav_location') == 'bottom') {
             return $content.$cat_nav;
         } else {
-            return $cat_nav. '<br><br>' .$content.$cat_nav;
+            return $cat_nav.$content.$cat_nav;
         }
 
     } else {
