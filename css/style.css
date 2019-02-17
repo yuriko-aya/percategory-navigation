@@ -16,3 +16,6 @@ a:visited {
     border-bottom: solid 1px;
     border-top: solid 1px;
 }
+#chapter-select {
+    max-width: 100%;
+}

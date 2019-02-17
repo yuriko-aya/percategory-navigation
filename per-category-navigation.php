@@ -3,7 +3,7 @@
 Plugin Name:  Per Category Navigation
 Plugin URI:   https://aya.sanusi.id
 Description:  Make Navigation for post by category
-Version:      20190114
+Version:      20190217
 Author:       Yuriko Aya
 Author URI:   https://aya.sanusi.id
 License:      GPL2
@@ -14,9 +14,11 @@ require( dirname(__FILE__) . '/' . 'admin/admin-menu.php');
 
 add_action('get_header','add_bootstrap');
 function add_bootstrap() {
-    // let's add bootstrap for nav in case you don't have one! also some cutom css
+    $the_date = date("Ynj.G.i");
+    // let's add bootstrap for nav in case you don't have one! also some cutom css and js for drop down
     wp_enqueue_style('bootstrap_for_nav','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
-    wp_enqueue_style('per_category_navi_style', plugins_url( 'css/style.css', __FILE__ ));
+    wp_enqueue_style('per_category_navi_style', plugins_url( 'css/style.css', __FILE__ ), array(), $ver = $the_date);
+    wp_enqueue_script( 'percategory_navi_script', plugins_url( 'js/script.js', __FILE__ ), array(), $ver = $the_date, true );
 }
 
 
@@ -52,6 +54,7 @@ function the_nav($content) {
         // get post title and slug from all posts content
         foreach($cat_lists as $category) {
             $post_list[] = $category->post_title;
+            $post_id[] = $category->ID;
             $link_list[] = $category->post_name;
         }
 
@@ -62,7 +65,7 @@ function the_nav($content) {
             $prev = '<div class="col-sm-4 text-left percanav"></div>';
         } else {
             // if not first, make normal previous link 
-            $prev = '<div class="col-sm-4 text-left percanav"><a href="/' .$link_list[$location-1].'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
+            $prev = '<div class="col-sm-4 text-left percanav"><a href="' .get_permalink( $post_id[$location-1] ).'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
         }
 
         if($location+1 == count($post_list)) {
@@ -70,12 +73,20 @@ function the_nav($content) {
             $next = '<div class="col-sm-4 text-right percanav"></div>';
         } else {
             // if not last, create next link
-            $next = '<div class="col-sm-4 text-right percanav"><a href="/' .$link_list[$location+1].'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
+            $next = '<div class="col-sm-4 text-right percanav"><a href="' .get_permalink( $post_id[$location+1] ).'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
         }
 
         // index link
-        $cat_index = '<div class="col-sm-4 text-center percanav"><a href="'.$cat_link.'">INDEX <br>' .$cat_name. '</a></div>';
-
+        $cat_index = '<div class="col-sm-4 text-center percanav"><a href="'.$cat_link.'">INDEX <br>' .$cat_name. '</a>';
+        $cat_index .= '<select id="chapter-select">';
+        for ($i=0; $i < count($post_list); $i++) {
+            if ($i == $location) { 
+                $cat_index .= '<option value="' .get_permalink( $post_id[$i] ). '" selected>' .$post_list[$i]. '</option>';
+        } else {
+                $cat_index .= '<option value="' .get_permalink( $post_id[$i] ). '">' .$post_list[$i]. '</option>';
+            }
+        }
+        $cat_index .= '</select></div>';
         $cat_nav = '<div class="row">'. $prev.$cat_index.$next .'</div>';
 
         // Checking for existed config
