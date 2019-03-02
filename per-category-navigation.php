@@ -36,7 +36,7 @@ function the_nav($content) {
         );
 
         // get post slug, category name and id
-        $post_slug = $post->post_name;
+        $current_post_id = $post->ID;
         $terms = wp_get_object_terms( $post->ID, 'category', $term_args);
         $cat_name =  $terms[0]->name;
         $cat_id =  $terms[0]->term_id;
@@ -55,25 +55,29 @@ function the_nav($content) {
         foreach($cat_lists as $category) {
             $post_list[] = $category->post_title;
             $post_id[] = $category->ID;
-            $link_list[] = $category->post_name;
         }
 
-        $location = array_search($post_slug, $link_list); // Search current post location in category
-        
-        if($location == 0) { 
-            // it it was first post, remove previous link
-            $prev = '<div class="col-sm-4 text-left percanav"></div>';
-        } else {
-            // if not first, make normal previous link 
-            $prev = '<div class="col-sm-4 text-left percanav"><a href="' .get_permalink( $post_id[$location-1] ).'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
-        }
+        $location = array_search($current_post_id, $post_id); // Search current post location in category
 
-        if($location+1 == count($post_list)) {
-            // if post was last post, remove next link
+        if(isset($_GET) && $_GET['preview'] == 'true' && empty($location)){        
+            $prev = '<div class="col-sm-4 text-left percanav"><a href="' .get_permalink( $post_id[count($post_list)-1] ).'"><< PREV <br>' .$post_list[count($post_list)-1]. '</a></div>';
             $next = '<div class="col-sm-4 text-right percanav"></div>';
         } else {
-            // if not last, create next link
-            $next = '<div class="col-sm-4 text-right percanav"><a href="' .get_permalink( $post_id[$location+1] ).'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
+            if($location == 0) { 
+                // it it was first post, remove previous link
+                $prev = '<div class="col-sm-4 text-left percanav"></div>';
+            } else {
+                // if not first, make normal previous link 
+                $prev = '<div class="col-sm-4 text-left percanav"><a href="' .get_permalink( $post_id[$location-1] ).'"><< PREV <br>' .$post_list[$location-1]. '</a></div>';
+            }
+
+            if($location+1 == count($post_list)) {
+                // if post was last post, remove next link
+                $next = '<div class="col-sm-4 text-right percanav"></div>';
+            } else {
+                // if not last, create next link
+                $next = '<div class="col-sm-4 text-right percanav"><a href="' .get_permalink( $post_id[$location+1] ).'">NEXT >><br>' .$post_list[$location+1]. '</a></div>';
+            }
         }
 
         // index link
