@@ -16,7 +16,7 @@ add_action('get_header','add_bootstrap');
 function add_bootstrap() {
     $the_date = date("Ynj.G.i");
     // let's add bootstrap for nav in case you don't have one! also some cutom css and js for drop down
-    wp_enqueue_style('bootstrap_for_nav','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+    wp_enqueue_style('bootstrap_for_nav',plugins_url( 'css/bootstrap.min.css', __FILE__ ), array(), $ver = $the_date);
     wp_enqueue_style('per_category_navi_style', plugins_url( 'css/style.css', __FILE__ ), array(), $ver = $the_date);
     wp_enqueue_script( 'percategory_navi_script', plugins_url( 'js/script.js', __FILE__ ), array(), $ver = $the_date, true );
 }
