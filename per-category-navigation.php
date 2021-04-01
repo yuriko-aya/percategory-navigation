@@ -91,7 +91,7 @@ function the_nav($content) {
             }
         }
         $cat_index .= '</select></div>';
-        $cat_nav = '<div class="row" style="min-width: 800px">'. $prev.$cat_index.$next .'</div>';
+        $cat_nav = '<div class="row">'. $prev.$cat_index.$next .'</div>';
 
         // Checking for existed config
         if (get_option('catnav_location') && get_option('catnav_location') == 'top') {
