@@ -59,7 +59,7 @@ function the_nav($content) {
 
         $location = array_search($current_post_id, $post_id); // Search current post location in category
 
-        if(isset($_GET['preview']) && $_GET['preview'] == 'true' && empty($location)){        
+        if(isset($_GET['preview']) && empty($location)){        
             $prev = '<div class="col-sm-4 text-left percanav"><a href="' .get_permalink( $post_id[count($post_list)-1] ).'"><< PREV <br>' .$post_list[count($post_list)-1]. '</a></div>';
             $next = '<div class="col-sm-4 text-right percanav"></div>';
         } else {
